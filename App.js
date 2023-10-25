@@ -43,13 +43,19 @@ import Button from './components/Button';
 export default function App() {
 
   const [toastType, setToastType] = useState("success");
+  const [toastText, setToastText] = useState("Main text");
+  const [toastDescription, setToastDescription] = useState("Description");
   const toastRef = useRef(null);
 
-  const handleShowToast = () => {
-    if (toastRef.current) {
-      toastRef.current.show();
-    }
-  };
+  const handleShowToast = (type, text, description) => {
+        setToastType(type);
+        setToastText(text);
+        setToastDescription(description);
+        
+        if (toastRef.current) {
+          toastRef.current.show();
+        }
+      };
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -60,10 +66,10 @@ export default function App() {
         description="Lorem Ipsum Description"
         ref={toastRef} />
 
-      <Button type="success" text="Success" onPress={() => { setToastType("success"); handleShowToast(); }} />
-      <Button type="danger" text="Danger" onPress={() => { setToastType("danger"); handleShowToast(); }} />
-      <Button type="info" text="Info" onPress={() => { setToastType("info"); handleShowToast(); }} />
-      <Button type="warning" text="Warning" onPress={() => { setToastType("warning"); handleShowToast(); }} />
+      <Button type="success" text="Success" onPress={() => { handleShowToast("Success", "Text Success", "Success"); }} />
+      <Button type="danger" text="Danger" onPress={() => { handleShowToast("Danger", "Text Danger", "Danger"); }} />
+      <Button type="info" text="Info" onPress={() => { handleShowToast("Info", "Text Info", "Info"); }} />
+      <Button type="warning" text="Warning" onPress={() => { handleShowToast("Warning", "Text Warning", "Warning"); }} />
 
     </View>
   );
